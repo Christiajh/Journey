@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journey</title>
+    <link rel="icon" href="https://ouch-cdn2.icons8.com/HjjBoWYHnBHRlS2rC26bcV8cgAzgqzcBfmuDtbFjhXg/rs:fit:368:389/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvMjAv/ZGUyM2Y1MjgtZmFh/Zi00ODNkLWI0NzIt/MmNkZTIzNzU2OWE0/LnBuZw.png" type="image/png" sizes="32x32">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #ffffff,  #ea81f2, #ffffff, #ffffff); /* Gradient menggunakan warna pink dan kuning muda */
+            background-color: #f9d5e5; /* Warna latar belakang utama */
+        }
+
+        .header {
+            background-color: #f0f0f0;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between; /* Menggunakan space-between untuk menjaga jarak antara logo dan jam */
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 40px; /* Ubah ukuran logo sesuai kebutuhan */
+            margin-right: 10px; /* Jarak antara logo dan jam */
+        }
+
+        .list-container {
+            width: 100%; /* Mengambil 100% lebar */
+            max-width: 600px; /* Lebar maksimum untuk card */
+            margin: 20px auto; /* Margin atas dan bawah 20px, otomatis di tengah */
+            text-align: left; /* Menjadikan teks berada di sebelah kiri */
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* Mengatasi efek bayangan yang melebihi batas card */
+        }
+
+        .list {
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Warna latar belakang berbeda untuk setiap level */
+        .list-item:nth-child(1) {
+            background: linear-gradient(to right, #b3d1f6, #b3d1f6); /* Biru muda ke biru tua */
+        }
+
+        .list-item:nth-child(2) {
+            background: linear-gradient(to right, #bd9aee,   #bd9aee); /* Hijau muda ke hijau tua */
+        }
+
+        .list-item:nth-child(3) {
+            background: linear-gradient(to right, #b3d1f6,#b3d1f6); /* Oranye muda ke oranye tua */
+        }
+
+        .list-item:nth-child(4) {
+            background: linear-gradient(to right,#bd9aee, #bd9aee); /* Merah muda ke merah tua */
+        }
+
+        .list-item:nth-child(5) {
+            background: linear-gradient(to right,#b3d1f6, #b3d1f6); /* Ungu muda ke ungu tua */
+        }
+
+        .list-item:nth-child(6) {
+            background: linear-gradient(to right, #bd9aee, #bd9aee); /* Biru muda ke abu-abu */
+        }
+
+        .list-item:nth-child(7) {
+            background: linear-gradient(to right, #b3d1f6, #b3d1f6); /* Hijau muda ke hijau tua */
+        }
+
+        .list-item:nth-child(8) {
+            background: linear-gradient(to right, #bd9aee, #bd9aee); /* Oranye muda ke oranye tua */
+        }
+
+        .list-item:nth-child(9) {
+            background: linear-gradient(to right,#b3d1f6, #b3d1f6); /* Merah muda ke merah tua */
+        }
+
+        .list-item:nth-child(10) {
+            background: linear-gradient(to right, #bd9aee, #bd9aee); /* Ungu muda ke ungu tua */
+        }
+
+        .list-item:nth-child(11) {
+            background: linear-gradient(to right, #b3d1f6, #b3d1f6); /* Ungu muda ke ungu tua */
+        }
+
+        .list-item:nth-child(12) {
+            background: linear-gradient(to right, #bd9aee, #bd9aee); /* Ungu muda ke ungu tua */
+        }
+
+        .list-item:nth-child(13) {
+            background: linear-gradient(to right, #b3d1f6, #b3d1f6); /* Ungu muda ke ungu tua */
+        }
+
+        .list-item:nth-child(14) {
+            background: linear-gradient(to right,#bd9aee, #bd9aee); /* Ungu muda ke ungu tua */
+        }
+
+        .list-item:nth-child(15) {
+            background: linear-gradient(to right,#b3d1f6, #b3d1f6); /* Ungu muda ke ungu tua */
+        }
+
+        .list-item:nth-child(16) {
+            background: linear-gradient(to right, #bd9aee, #bd9aee); /* Ungu muda ke ungu tua */
+        }
+
+        .list-item:nth-child(17) {
+            background: linear-gradient(to right, #b3d1f6,#b3d1f6); /* Ungu muda ke ungu tua */
+        }
+
+        .list-item:nth-child(18) {
+            background: linear-gradient(to right, #bd9aee, #bd9aee); /* Ungu muda ke ungu tua */
+        }
+        .list-item:nth-child(19) {
+            background: linear-gradient(to right, #b3d1f6, #b3d1f6); /* Ungu muda ke ungu tua */
+        }
+        .list-item:nth-child(20) {
+            background: linear-gradient(to right, #bd9aee, #bd9aee); /* Ungu muda ke ungu tua */
+        }
+        .list-item:nth-child(21) {
+            background: linear-gradient(to right,#b3d1f6, #b3d1f6); /* Ungu muda ke ungu tua */
+        }
+        .list-item:nth-child(22) {
+            background: linear-gradient(to right, #bd9aee, #bd9aee); /* Ungu muda ke ungu tua */
+        }
+        .list-item:nth-child(23) {
+            background: linear-gradient(to right,#b3d1f6, #b3d1f6); /* Ungu muda ke ungu tua */
+        }
+        .list-item:nth-child(24) {
+            background: linear-gradient(to right, #bd9aee, #bd9aee); /* Ungu muda ke ungu tua */
+        }
+
+
+
+        .list-item {
+            padding: 15px 20px; /* Padding lebih besar untuk item list */
+            font-size: 18px; /* Ubah ukuran font sesuai kebutuhan */
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.3s ease; /* Transisi warna latar belakang */
+            display: block; /* Menjadikan tautan sebagai elemen blok */
+            color: #000; /* Warna teks hitam */
+            text-decoration: none; /* Menghapus dekorasi tautan */
+        }
+
+        .list-item:hover {
+            filter: brightness(1.2); /* Efek pencahayaan saat dihover */
+        }
+
+        .list-item:last-child {
+            border-bottom: none; /* Menghapus garis bawah dari item terakhir */
+        }
+
+        .confirm-box {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            width: 300px; /* Lebar kotak konfirmasi */
+            max-width: 80%;
+            text-align: center;
+        }
+
+        .confirm-box h2 {
+            margin-top: 0;
+            font-size: 20px; /* Ukuran font judul */
+            color: #333; /* Warna teks judul */
+        }
+
+        .confirm-box button {
+            background-color: #ea81f2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .confirm-box button:hover {
+            background-color: #f9ef7c;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <!-- Hapus logo dan jam -->
+        </div>
+    </div>
+    <div class="list-container">
+        <div class="list">
+            <a href="intro.html" class="list-item">Introduction</a>
+<a href="1.html" class="list-item" onclick="showConfirmation(event, '1.html')" id="level1">Level 1</a>
+<a href="2.html" class="list-item" onclick="showConfirmation(event, '2.html')" id="level2" class="locked">Level 2</a>
+<a href="3.html" class="list-item" onclick="showConfirmation(event, '3.html')" id="level3" class="locked">Level 3</a>
+<a href="4.html" class="list-item" onclick="showConfirmation(event, '4.html')" id="level4" class="locked">Level 4</a>
+<a href="5.html" class="list-item" onclick="showConfirmation(event, '5.html')" id="level5" class="locked">Level 5</a>
+<a href="6.html" class="list-item" onclick="showConfirmation(event, '6.html')" id="level6" class="locked">Level 6</a>
+<a href="7.html" class="list-item" onclick="showConfirmation(event, '7.html')" id="level7" class="locked">Level 7</a>
+<a href="8.html" class="list-item" onclick="showConfirmation(event, '8.html')" id="level8" class="locked">Level 8</a>
+<a href="9.html" class="list-item" onclick="showConfirmation(event, '9.html')" id="level9" class="locked">Level 9</a>
+
+        </div>
+    </div>
+
+    <!-- Notifikasi konfirmasi -->
+    <div class="confirm-box" id="confirmBox">
+        <h2>Do you want to play?</h2>
+        <button onclick="navigateToPage(event)">Yes</button>
+        <button onclick="closeConfirmBox()">No</button>
+    </div>
+
+    <script>
+        // Fungsi untuk menampilkan notifikasi
+        function showConfirmation(event, targetPage) {
+            event.preventDefault(); // Menghentikan aksi bawaan dari tautan
+            const targetLevel = parseInt(targetPage.slice(0, 1)); // Ambil nomor level dari targetPage (mis. '1.html' menjadi 1)
+            
+            // Cek apakah level sebelumnya telah selesai
+            if (targetLevel > 1) {
+                for (let i = 1; i < targetLevel; i++) {
+                    const previousLevelKey = `level${i}_completed`;
+                    const isPreviousCompleted = localStorage.getItem(previousLevelKey);
+                    if (!isPreviousCompleted) {
+                        alert(`You must complete Level ${i} first!`);
+                        return;
+                    }
+                }
+            }
+            
+            // Tambahkan penanganan notifikasi untuk level 10, 11, 12, 13, dan level boss
+            if (targetLevel >= 10 && targetLevel <= 13) {
+                alert("Maaf, level ini belum tersedia karena masih dalam pengembangan.");
+            } else if (targetLevel === 14) {
+                alert("Maaf, level boss belum tersedia karena masih dalam pengembangan.");
+            } else {
+                // Tampilkan kotak konfirmasi untuk level lainnya
+                document.getElementById('confirmBox').style.display = 'block';
+                // Simpan halaman yang dituju sebagai data tambahan
+                document.getElementById('confirmBox').setAttribute('data-target', targetPage);
+            }
+        }
+    
+        // Fungsi untuk menutup kotak konfirmasi
+        function closeConfirmBox() {
+            document.getElementById('confirmBox').style.display = 'none';
+        }
+    
+        // Fungsi untuk pindah ke halaman terkait
+        function navigateToPage(event) {
+            // Mendapatkan halaman yang dituju dari data tambahan
+            const targetPage = document.getElementById('confirmBox').getAttribute('data-target');
+            
+            // Simpan status level yang sedang dibuka
+            const currentLevel = parseInt(targetPage.slice(0, 1));
+            const currentLevelKey = `level${currentLevel}_completed`;
+            localStorage.setItem(currentLevelKey, true);
+    
+            // Pindah ke halaman yang diinginkan
+            window.location.href = targetPage;
+            
+            // Tutup kotak konfirmasi setelah pengguna memilih
+            closeConfirmBox();
+        }
+    
+        // Panggil fungsi untuk memeriksa penyelesaian setiap level saat halaman dimuat
+        window.onload = function() {
+            const totalLevels = 13; // Jumlah total level yang ada
+            
+            for (let i = 1; i <= totalLevels; i++) {
+                checkLevelCompletion(i);
+            }
+        };
+    
+        // Fungsi untuk memeriksa apakah semua soal di suatu level telah dijawab dengan benar
+        function checkLevelCompletion(levelNumber) {
+            const levelKey = `level${levelNumber}_completed`;
+    
+            switch (levelNumber) {
+                // Menambahkan pengecekan level secara berurutan sesuai dengan setiap level
+                case 1:
+                    const level1Questions = [
+                        { question: "What is your name?", correct: "John" },
+                        { question: "Where do you live?", correct: "New York" },
+                        { question: "How old are you?", correct: "20" }
+                    ];
+    
+                    const allCorrect1 = level1Questions.every(question => {
+                        const storedAnswer = localStorage.getItem(question.question);
+                        return storedAnswer === question.correct;
+                    });
+    
+                    if (allCorrect1) {
+                        localStorage.setItem(levelKey, true);
+                        alert(`Congratulations! You have completed Level ${levelNumber}.`);
+                        document.getElementById('level2').classList.remove('locked');
+                    }
+                    break;
+                case 2:
+                    const level2Questions = [
+                        { question: "What is your favorite color?", correct: "Blue" },
+                        { question: "Which animal do you like most?", correct: "Dog" },
+                        { question: "What is your favorite sport?", correct: "Football" }
+                    ];
+    
+                    const allCorrect2 = level2Questions.every(question => {
+                        const storedAnswer = localStorage.getItem(question.question);
+                        return storedAnswer === question.correct;
+                    });
+    
+                    if (allCorrect2) {
+                        localStorage.setItem(levelKey, true);
+                        alert(`Congratulations! You have completed Level ${levelNumber}.`);
+                        document.getElementById('level3').classList.remove('locked');
+                    }
+                    break;
+                case 3:
+                    const level3Questions = [
+                        { question: "What is the capital of France?", correct: "Paris" },
+                        { question: "Which planet is known as the Red Planet?", correct: "Mars" },
+                        { question: "Who painted the Mona Lisa?", correct: "Leonardo da Vinci" }
+                    ];
+    
+                    const allCorrect3 = level3Questions.every(question => {
+                        const storedAnswer = localStorage.getItem(question.question);
+                        return storedAnswer === question.correct;
+                    });
+    
+                    if (allCorrect3) {
+                        localStorage.setItem(levelKey, true);
+                        alert(`Congratulations! You have completed Level ${levelNumber}.`);
+                        document.getElementById('level4').classList.remove('locked');
+                    }
+                    break;
+                case 4:
+                    const level4Questions = [
+                        { question: "What is the largest mammal?", correct: "Blue Whale" },
+                        { question: "Who wrote 'Romeo and Juliet'?", correct: "William Shakespeare" },
+                        { question: "What is the chemical symbol for water?", correct: "H2O" }
+                    ];
+    
+                    const allCorrect4 = level4Questions.every(question => {
+                        const storedAnswer = localStorage.getItem(question.question);
+                        return storedAnswer === question.correct;
+                    });
+    
+                    if (allCorrect4) {
+                        localStorage.setItem(levelKey, true);
+                        alert(`Congratulations! You have completed Level ${levelNumber}.`);
+                        document.getElementById('level5').classList.remove('locked');
+                    }
+                    break;
+                case 5:
+                    const level5Questions = [
+                        { question: "Who discovered penicillin?", correct: "Alexander Fleming" },
+                        { question: "What is the tallest mountain in the world?", correct: "Mount Everest" },
+                        { question: "Which country is known as the Land of the Rising Sun?", correct: "Japan" }
+                    ];
+    
+                    const allCorrect5 = level5Questions.every(question => {
+                        const storedAnswer = localStorage.getItem(question.question);
+                        return storedAnswer === question.correct;
+                    });
+    
+                    if (allCorrect5) {
+                        localStorage.setItem(levelKey, true);
+                        alert(`Congratulations! You have completed Level ${levelNumber}.`);
+                        document.getElementById('level6').classList.remove('locked');
+                    }
+                    break;
+                case 6:
+                    const level6Questions = [
+                        { question: "What is the currency of Brazil?", correct: "Brazilian Real" },
+                        { question: "Who invented the telephone?", correct: "Alexander Graham Bell" },
+                        { question: "Which planet is known as the 'Morning Star'?", correct: "Venus" }
+                    ];
+    
+                    const allCorrect6 = level6Questions.every(question => {
+                        const storedAnswer = localStorage.getItem(question.question);
+                        return storedAnswer === question.correct;
+                    });
+    
+                    if (allCorrect6) {
+                        localStorage.setItem(levelKey, true);
+                        alert(`Congratulations! You have completed Level ${levelNumber}.`);
+                        document.getElementById('level7').classList.remove('locked');
+                    }
+                    break;
+                case 7:
+                    const level7Questions = [
+                        { question: "Who painted the Sistine Chapel ceiling?", correct: "Michelangelo" },
+                        { question: "What is the longest river in the world?", correct: "Nile River" },
+                        { question: "Which gas do plants absorb from the atmosphere?", correct: "Carbon Dioxide" }
+                    ];
+    
+                    const allCorrect7 = level7Questions.every(question => {
+                        const storedAnswer = localStorage.getItem(question.question);
+                        return storedAnswer === question.correct;
+                    });
+    
+                    if (allCorrect7) {
+                        localStorage.setItem(levelKey, true);
+                        alert(`Congratulations! You have completed Level ${levelNumber}.`);
+                        document.getElementById('level8').classList.remove('locked');
+                    }
+                    break;
+                case 8:
+                    const level8Questions = [
+                        { question: "Who wrote 'The Adventures of Tom Sawyer'?", correct: "Mark Twain" },
+                        { question: "What is the smallest continent by land area?", correct: "Australia" },
+                        { question: "Which scientist developed the theory of relativity?", correct: "Albert Einstein" }
+                    ];
+    
+                    const allCorrect8 = level8Questions.every(question => {
+                        const storedAnswer = localStorage.getItem(question.question);
+                        return storedAnswer === question.correct;
+                    });
+    
+                    if (allCorrect8) {
+                        localStorage.setItem(levelKey, true);
+                        alert(`Congratulations! You have completed Level ${levelNumber}.`);
+                        document.getElementById('level9').classList.remove('locked');
+                    }
+                    break;
+                case 9:
+                    const level9Questions = [
+                        { question: "What is the capital of Russia?", correct: "Moscow" },
+                        { question: "Who painted 'Starry Night'?", correct: "Vincent van Gogh" },
+                        { question: "Which planet is known as the 'Red Planet'?", correct: "Mars" }
+                    ];
+    
+                    const allCorrect9 = level9Questions.every(question => {
+                        const storedAnswer = localStorage.getItem(question.question);
+                        return storedAnswer === question.correct;
+                    });
+    
+                    if (allCorrect9) {
+                        localStorage.setItem(levelKey, true);
+                        alert(`Congratulations! You have completed Level ${levelNumber}.`);
+                        document.getElementById('level10').classList.remove('locked');
+                    }
+                    break;
+                case 10:
+                    const level10Questions = [
+                        { question: "What is the largest ocean on Earth?", correct: "Pacific Ocean" },
+                        { question: "Who wrote 'Hamlet'?", correct: "William Shakespeare" },
+                        { question: "What is the capital of Japan?", correct: "Tokyo" }
+                    ];
+    
+                    const allCorrect10 = level10Questions.every(question => {
+                        const storedAnswer = localStorage.getItem(question.question);
+                        return storedAnswer === question.correct;
+                    });
+    
+                    if (allCorrect10) {
+                        localStorage.setItem(levelKey, true);
+                        alert(`Congratulations! You have completed Level ${levelNumber}.`);
+                        document.getElementById('level11').classList.remove('locked');
+                    }
+                    break;
+                case 11:
+                    const level11Questions = [
+                        { question: "Who discovered America?", correct: "Christopher Columbus" },
+                        { question: "What is the largest desert in the world?", correct: "Sahara Desert" },
+                        { question: "Which bird can fly backward?", correct: "Hummingbird" }
+                    ];
+    
+                    const allCorrect11 = level11Questions.every(question => {
+                        const storedAnswer = localStorage.getItem(question.question);
+                        return storedAnswer === question.correct;
+                    });
+    
+                    if (allCorrect11) {
+                        localStorage.setItem(levelKey, true);
+                        alert(`Congratulations! You have completed Level ${levelNumber}.`);
+                        document.getElementById('level12').classList.remove('locked');
+                    }
+                    break;
+                case 12:
+                    const level12Questions = [
+                        { question: "What is the largest country by land area?", correct: "Russia" },
+                        { question: "Who wrote 'Pride and Prejudice'?", correct: "Jane Austen" },
+                        { question: "Which gas do humans exhale when they breathe out?", correct: "Carbon Dioxide" }
+                    ];
+    
+                    const allCorrect12 = level12Questions.every(question => {
+                        const storedAnswer = localStorage.getItem(question.question);
+                        return storedAnswer === question.correct;
+                    });
+    
+                    if (allCorrect12) {
+                        localStorage.setItem(levelKey, true);
+                        alert(`Congratulations! You have completed Level ${levelNumber}.`);
+                        document.getElementById('level13').classList.remove('locked');
+                    }
+                    break;
+                case 13:
+                    const level13Questions = [
+                        { question: "What is the currency of India?", correct: "Indian Rupee" },
+                        { question: "Who invented the light bulb?", correct: "Thomas Edison" },
+                        { question: "Which ocean is the largest?", correct: "Pacific Ocean" }
+                    ];
+    
+                    const allCorrect13 = level13Questions.every(question => {
+                        const storedAnswer = localStorage.getItem(question.question);
+                        return storedAnswer === question.correct;
+                    });
+    
+                    if (allCorrect13) {
+                        localStorage.setItem(levelKey, true);
+                        alert(`Congratulations! You have completed Level ${levelNumber}.`);
+                        document.getElementById('level_boss').classList.remove('locked');
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    </script>
+    
+    
+</body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journey</title>
+    <link rel="icon" href="https://ouch-cdn2.icons8.com/HjjBoWYHnBHRlS2rC26bcV8cgAzgqzcBfmuDtbFjhXg/rs:fit:368:389/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvMjAv/ZGUyM2Y1MjgtZmFh/Zi00ODNkLWI0NzIt/MmNkZTIzNzU2OWE0/LnBuZw.png" type="image/png" sizes="32x32">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background-color: #f0f0f0;
+            padding: 10px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .question-container {
+            margin: 20px;
+            text-align: left;
+        }
+        .answer {
+    /* display: block; */ /* Hapus baris ini */
+    width: 100%; /* Tambahkan baris ini */
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+        .answer:hover {
+            background-color: #f0f0f0;
+        }
+        .next-button {
+            background-color: #ea81f2;
+            color: rgb(0, 0, 0);
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 5px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .next-button:hover {
+            background-color: #f9ef79;
+        }
+        .disabled {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .modal-content h3 {
+            margin: 0 0 20px;
+        }
+        .modal-content button {
+            background-color: #ea81f2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .modal-content button:hover {
+            background-color: #f9ef79;
+        }
+        .modal-content .cancel-button {
+            background-color: #f44336;
+        }
+        .modal-content .cancel-button:hover {
+            background-color: #e53935;
+        }
+        .notification {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 20px;
+            z-index: 1;
+            display: none;
+            width: 300px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .Hint-modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .Hint-modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-align: left;
+        }
+        .Hint-modal-content h3 {
+            margin: 0 0 10px;
+        }
+        .Hint-modal-content p {
+            margin: 10px 0;
+        }
+        .Hint-modal-content button {
+            background-color: #ea81f2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .Hint-modal-content button:hover {
+            background-color: #f9ef79;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span id="timer">00:00</span>
+        <button class="exit-button" onclick="showModal()">X</button>
+    </div>
+    <div class="question-container">
+        <h2 id="question">Complete the sentence:</h2>
+        <div id="answers">
+            <!-- Answers will be dynamically generated here -->
+        </div>
+        <button class="next-button disabled" onclick="nextQuestion()">Next</button>
+    </div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h3>Do you want to end the session?</h3>
+            <button onclick="endSession()">Yes</button>
+            <button class="cancel-button" onclick="hideModal()">No</button>
+        </div>
+    </div>
+    <div id="Hint-modal" class="Hint-modal">
+        <div class="Hint-modal-content">
+            <h3>Hint</h3>
+            <p id="Hint-text"></p>
+            <button onclick="hideHintModal()">Close</button>
+        </div>
+    </div>
+    <div id="notification" class="notification">
+        <p id="notification-message"></p>
+    </div>
+    <script>
+        const questions = [
+        { question: "Their", answers: ["book", "dog", "friends", "house"], correct: "friends", Hint: "Use the possessive pronoun for a group of people." },
+    { question: "She saw ___ at the party last night.", answers: ["him", "he", "his", "hers"], correct: "him", Hint: "Choose the correct object pronoun for a male person." },
+    { question: "We ___ to the museum every weekend.", answers: ["goes", "go", "went", "going"], correct: "go", Hint: "What is the correct subject pronoun for a group of people?" },
+    { question: "This is ___ dog.", answers: ["my", "mine", "I", "me"], correct: "my", Hint: "Use the correct possessive pronoun for something belonging" },
+    { question: "You should talk to ___ about that issue.", answers: ["she", "her", "hers", "herself"], correct: "her", Hint: "Choose the correct object pronoun for a female person." },
+    { question: "___ usually takes the bus to work.", answers: ["He", "His", "Him", "Himself"], correct: "He", Hint: "Use the correct subject pronoun for a male person." },
+    { question: "They ___ going to the beach tomorrow.", answers: ["is", "are", "am", "be"], correct: "are", Hint: "Use the correct form of 'to be' for a group of people." },
+    { question: "I gave ___ a gift for her birthday.", answers: ["him", "he", "his", "hers"], correct: "her", Hint: "Choose the correct object pronoun for a female person." },
+    { question: "The car is ___ because the keys are missing.", answers: ["theirs", "their", "they", "them"], correct: "theirs", Hint: "Use the correct possessive pronoun for a group of people." },
+    { question: "She ___ singing in the choir.", answers: ["am", "is", "are", "be"], correct: "is", Hint: "Use the correct form of 'to be' for a female person." },
+    { question: "___ are not allowed to enter this area without permission.", answers: ["She", "Her", "Hers", "Herself"], correct: "Her", Hint: "Choose the correct subject pronoun for a female person." },
+    { question: "The keys are ___ because I found them on the table.", answers: ["mine", "my", "I", "me"], correct: "mine", Hint: "Use the correct possessive pronoun for something belonging." },
+    { question: "He ___ always late for class.", answers: ["am", "is", "are", "be"], correct: "is", Hint: "Use the correct form of 'to be' for a male person." },
+    { question: "___ were at the park yesterday.", answers: ["We", "Us", "Our", "Ourselves"], correct: "We", Hint: "Choose the correct subject pronoun for a group of people." },
+    { question: "This book belongs to ___.", answers: ["she", "her", "hers", "herself"], correct: "her", Hint: "Use the correct possessive pronoun for a female person." },
+    { question: "___ should finish the project by tomorrow.", answers: ["He", "His", "Him", "Himself"], correct: "He", Hint: "Use the correct subject pronoun for a male person." },
+    { question: "The keys are ___ because I found them on the table.", answers: ["mine", "my", "I", "me"], correct: "mine", Hint: "Use the correct possessive pronoun for something belonging." },
+    { question: "___ always late for class.", answers: ["am", "is", "are", "be"], correct: "is", Hint: "Use the correct form of 'to be' for a male person." },
+    { question: "___ were at the park yesterday.", answers: ["We", "Us", "Our", "Ourselves"], correct: "We", Hint: "Choose the correct subject pronoun for a group of people." },
+    { question: "This book belongs to ___.", answers: ["she", "her", "hers", "herself"], correct: "her", Hint: "Use the correct possessive pronoun for a female person." },
+    { question: "___ should finish the project by tomorrow.", answers: ["He", "His", "Him", "Himself"], correct: "He", Hint: "Use the correct subject pronoun for a male person." },
+    { question: "She ___ going to the beach tomorrow.", answers: ["am", "is", "are", "be"], correct: "is", Hint: "Use the correct form of 'to be' for a female person." },
+    { question: "___ are not allowed to enter this area without permission.", answers: ["She", "Her", "Hers", "Herself"], correct: "Her", Hint: "Choose the correct subject pronoun for a female person." },
+    { question: "The keys are ___ because I found them on the table.", answers: ["mine", "my", "I", "me"], correct: "mine", Hint: "Use the correct possessive pronoun for something belonging." },
+    { question: "___ always late for class.", answers: ["am", "is", "are", "be"], correct: "is", Hint: "Use the correct form of 'to be' for a male person." },
+    { question: "___ were at the park yesterday.", answers: ["We", "Us", "Our", "Ourselves"], correct: "We", Hint: "Choose the correct subject pronoun for a group of people." },
+    { question: "This book belongs to ___.", answers: ["she", "her", "hers", "herself"], correct: "her", Hint: "Use the correct possessive pronoun for a female person." },
+    { question: "___ should finish the project by tomorrow.", answers: ["He", "His", "Him", "Himself"], correct: "He", Hint: "Use the correct subject pronoun for a male person." },
+    { question: "She ___ going to the beach tomorrow.", answers: ["am", "is", "are", "be"], correct: "is", Hint: "Use the correct form of 'to be' for a female person." },
+    { question: "___ are not allowed to enter this area without permission.", answers: ["She", "Her", "Hers", "Herself"], correct: "Her", Hint: "Choose the correct subject pronoun for a female person." },
+    { question: "The keys are ___ because I found them on the table.", answers: ["mine", "myself", "I", "me"], correct: "mine", Hint: "Use the correct possessive pronoun for something belonging." },
+    { question: "___ always forgets to bring his umbrella.", answers: ["He", "Him", "His", "Himself"], correct: "He", Hint: "Use the correct subject pronoun for a male person." },
+    { question: "We ___ going to the concert next week.", answers: ["are", "is", "be", "been"], correct: "are", Hint: "Use the correct form of 'to be' for a group of people." },
+    { question: "She ___ has a lot of work to do.", answers: ["is", "am", "have", "has"], correct: "has", Hint: "Use the correct form of 'to have' for a female person." },
+    { question: "___ can help you with your homework.", answers: ["We", "Us", "Our", "Ourselves"], correct: "We", Hint: "Choose the correct subject pronoun for a group of people." },
+    { question: "This book is ___ because I forgot to return it to the library.", answers: ["theirs", "their", "they", "them"], correct: "theirs", Hint: "Use the correct possessive pronoun for a group of people." },
+    { question: "___ don't know the answer to that question.", answers: ["She", "Her", "Hers", "Herself"], correct: "She", Hint: "Choose the correct subject pronoun for a female person." },
+    { question: "The keys are ___ because I found them on the table.", answers: ["mine", "myself", "I", "me"], correct: "mine", Hint: "Use the correct possessive pronoun for something belonging." },
+    { question: "___ always forgets to bring his umbrella.", answers: ["He", "Him", "His", "Himself"], correct: "He", Hint: "Use the correct subject pronoun for a male person." },
+    { question: "We ___ going to the concert next week.", answers: ["are", "is", "be", "been"], correct: "are", Hint: "Use the correct form of 'to be' for a group of people." },
+    { question: "She ___ has a lot of work to do.", answers: ["is", "am", "have", "has"], correct: "has", Hint: "Use the correct form of 'to have' for a female person." },
+    { question: "___ can help you with your homework.", answers: ["We", "Us", "Our", "Ourselves"], correct: "We", Hint: "Choose the correct subject pronoun for a group of people." },
+    { question: "This book is ___ because I forgot to return it to the library.", answers: ["theirs", "their", "they", "them"], correct: "theirs", Hint: "Use the correct possessive pronoun for a group of people." },
+    { question: "___ don't know the answer to that question.", answers: ["She", "Her", "Hers", "Herself"], correct: "She", Hint: "Choose the correct subject pronoun for a female person." },
+    { question: "The keys are ___ because I found them on the table.", answers: ["mine", "myself", "I", "me"], correct: "mine", Hint: "Use the correct possessive pronoun for something belonging." },
+    { question: "___ always forgets to bring his umbrella.", answers: ["He", "Him", "His", "Himself"], correct: "He", Hint: "Use the correct subject pronoun for a male person." },
+    { question: "We ___ going to the concert next week.", answers: ["are", "is", "be", "been"], correct: "are", Hint: "Use the correct form of 'to be' for a group of people." },
+    { question: "She ___ has a lot of work to do.", answers: ["is", "am", "have", "has"], correct: "has", Hint: "Use the correct form of 'to have' for a female person." },
+    { question: "___ can help you with your homework.", answers: ["We", "Us", "Our", "Ourselves"], correct: "We", Hint: "Choose the correct subject pronoun for a group of people." },
+    { question: "This book is ___ because I forgot to return it to the library.", answers: ["theirs", "their", "they", "them"], correct: "theirs", Hint: "Use the correct possessive pronoun for a group of people." }
+            // Add more questions as needed
+        ];
+
+        let currentQuestionIndex = 0;
+        let timerInterval;
+
+        updateQuestion();
+        startTimer();
+
+        function updateQuestion() {
+            const questionData = questions[currentQuestionIndex];
+            const { question, answers, correct } = questionData;
+
+            document.getElementById('question').textContent = question;
+            const answersContainer = document.getElementById('answers');
+            answersContainer.innerHTML = '';
+
+            const shuffledAnswers = shuffleArray([...answers]); // Copy answers array before shuffling
+            shuffledAnswers.forEach(answer => {
+                const answerElement = document.createElement('button');
+                answerElement.textContent = answer;
+                answerElement.classList.add('answer');
+                answerElement.onclick = () => checkAnswer(answer);
+                answersContainer.appendChild(answerElement);
+            });
+
+            document.querySelector('.next-button').classList.add('disabled');
+        }
+
+        function checkAnswer(answer) {
+            const questionData = questions[currentQuestionIndex];
+
+            if (answer === questionData.correct) {
+                const answerElements = document.querySelectorAll('.answer');
+                answerElements.forEach(element => {
+                    element.style.pointerEvents = 'none';
+                    element.style.opacity = '0.6';
+                });
+                setTimeout(nextQuestion, 1000); // Automatically go to next question after 1 second
+            } else {
+                showHint(questionData.Hint);
+                showNotification('Wrong answer!');
+            }
+
+            document.querySelector('.next-button').classList.remove('disabled');
+        }
+
+        function showHint(Hint) {
+            const HintModal = document.getElementById('Hint-modal');
+            const HintText = document.getElementById('Hint-text');
+            HintText.textContent = Hint;
+            HintModal.style.display = 'block';
+        }
+
+        function hideHintModal() {
+            const HintModal = document.getElementById('Hint-modal');
+            HintModal.style.display = 'none';
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const notificationMessage = document.getElementById('notification-message');
+            notificationMessage.textContent = message;
+            notification.style.display = 'block';
+
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000); // Hide notification after 3 seconds
+        }
+
+        function shuffleArray(array) {
+            const shuffledArray = [...array];
+            for (let i = shuffledArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+            }
+            return shuffledArray;
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                updateQuestion();
+            } else {
+                endQuiz();
+            }
+        }
+
+        function endQuiz() {
+            clearInterval(timerInterval);
+            alert('Quiz ended!');
+            // Add your own logic for ending the quiz, e.g., showing results
+        }
+
+        function startTimer() {
+            let totalSeconds = 0;
+            timerInterval = setInterval(() => {
+                totalSeconds++;
+                const minutes = Math.floor(totalSeconds / 60);
+                const seconds = totalSeconds % 60;
+                document.getElementById('timer').textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }, 1000); // Update timer every second
+        }
+
+        function showModal() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'block';
+        }
+
+        function hideModal() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'none';
+        }
+
+        function endSession() {
+            hideModal(); // Hide the modal first
+            alert('Session ended!');
+            window.location.href = 'english.html'; // Redirect to english.html
+        }
+    </script>
+</body>
+</html>

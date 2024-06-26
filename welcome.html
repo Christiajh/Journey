@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journey</title>
+    <link rel="icon" href="https://ouch-cdn2.icons8.com/HjjBoWYHnBHRlS2rC26bcV8cgAzgqzcBfmuDtbFjhXg/rs:fit:368:389/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvMjAv/ZGUyM2Y1MjgtZmFh/Zi00ODNkLWI0NzIt/MmNkZTIzNzU2OWE0/LnBuZw.png" type="image/png" sizes="32x32">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Global styles */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Disable scroll */
+            height: 100vh; /* Full viewport height */
+            background-color: #ffffff; /* White background */
+            display: flex;
+            flex-direction: column; /* Set main axis as column */
+            justify-content: flex-start; /* Align items at the start of main axis */
+            align-items: center; /* Center items on cross axis */
+            font-family: Arial, sans-serif;
+            color: #5a4a4a; /* Black text color */
+        }
+
+        .container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px; /* Adjusted margin-top */
+            margin-bottom: 40px; /* Added margin-bottom */
+        }
+
+        .container img.logo {
+            width: 450px; /* Adjusted logo width */
+            height: auto;
+        }
+
+        .learn-box {
+            margin-top: 40px; /* Adjusted margin-top */
+            text-align: left; /* Align text to left */
+            max-width: 300px; /* Limit width of the box */
+            padding-left: 20px; /* Add left padding */
+            margin-bottom: 40px; /* Added margin-bottom */
+        }
+
+        .learn-box h1 {
+            margin-bottom: 10px;
+        }
+
+        .learn-box ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px; /* Added margin-top */
+        }
+
+        .learn-box li {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .learn-box li a {
+            text-decoration: none;
+            color: inherit;
+            display: block; /* Ensure each link takes full width */
+            padding: 10px 0; /* Add padding top and bottom */
+        }
+
+        .learn-box li .button {
+            display: inline-block;
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .learn-box li .button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Notification box styles */
+        .notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            max-width: 300px;
+            text-align: center;
+            display: none;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            display: block;
+        }
+
+        .notification .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+            color: #777;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: #007bff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="bs.png" class="logo" alt="Duolingo Logo">
+        <div class="learn-box">
+            <h1>let's smack it!!!</h1>
+            <ul>
+                <li><a href="javascript:void(0);" onclick="redirectToLanguage('english')">Bahasa Inggris</a></li>
+                <li><a href="javascript:void(0);" onclick="showNotAvailable()">Jerman</a></li>
+                <li><a href="javascript:void(0);" onclick="showNotAvailable()">Tiongkok</a></li>
+                <li><a href="javascript:void(0);" onclick="showNotAvailable()">Indonesia</a></li>
+                <li><a href="javascript:void(0);" onclick="showNotAvailable()">Rusia</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Notification Box -->
+    <div class="notification" id="notification">
+        <span class="close-btn" onclick="closeNotification()">&times;</span>
+        <p>Bahasa ini belum tersedia.</p>
+    </div>
+
+    <!-- Loading Animation -->
+    <div class="notification" id="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script>
+        function redirectToLanguage(language) {
+            if (language === 'english') {
+                // Show loading animation
+                document.getElementById('loading').classList.add('show');
+
+                // Simulate loading time
+                setTimeout(() => {
+                    // Redirect to English language page
+                    window.location.href = 'english.html'; // Change URL to actual English language page
+                }, 2000); // Simulate 2 seconds loading time
+            } else {
+                showNotAvailable();
+            }
+        }
+
+        function showNotAvailable() {
+            // Show notification for unavailable languages
+            document.getElementById('notification').classList.add('show');
+
+            // Hide notification after 3 seconds
+            setTimeout(() => {
+                closeNotification();
+            }, 3000); // Hide after 3 seconds
+        }
+
+        function closeNotification() {
+            // Close notification box
+            document.getElementById('notification').classList.remove('show');
+        }
+    </script>
+</body>
+</html>
