@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Journey</title>
+    <title>BahKitaApp</title>
     <link rel="icon" href="https://ouch-cdn2.icons8.com/HjjBoWYHnBHRlS2rC26bcV8cgAzgqzcBfmuDtbFjhXg/rs:fit:368:389/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvMjAv/ZGUyM2Y1MjgtZmFh/Zi00ODNkLWI0NzIt/MmNkZTIzNzU2OWE0/LnBuZw.png" type="image/png" sizes="32x32">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
@@ -56,7 +56,7 @@
             max-width: 300px; /* Maximum width */
             padding: 15px;
             border: none;
-            background-color: #ea81f2; /* Green button background */
+            background-color: #76acdc; /* Green button background */
             color: #524242; /* White text color */
             cursor: pointer;
             border-radius: 5px;
@@ -66,7 +66,7 @@
         }
 
         button[type="submit"]:hover {
-            background-color: #f1e453; /* Darker green on hover */
+            background-color: #ffffff; /* Darker green on hover */
         }
 
         /* Loading animation */
@@ -79,8 +79,8 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            border: 5px solid rgba(42, 208, 47, 0.2); /* Light green border */
-            border-top: 5px solid #2ad02f; /* Green border on top */
+            border: 5px solid #a0a0a033; /* Light green border */
+            border-top: 5px solid #fffdfd; /* Green border on top */
             animation: spin 1s linear infinite; /* Spin animation */
             z-index: 2; /* Ensure loader is above other content */
         }
@@ -93,10 +93,15 @@
 </head>
 <body>
     <div class="container">
-        <img src="bs.png" class="logo" alt="Duolingo Logo" style="width: 450px; height: auto;">
+        <img src="BahKita.png" class="logo" alt="BahKita Logo" style="width: 450px; height: auto; margin-left: 13px;">
 
-        <img src="https://ouch-cdn2.icons8.com/x7ResuQ34w3rPXD5v1s-9X0eYN9XYWw_1g-2jIqrZEI/rs:fit:368:368/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9zdmcvNzY0/L2I5ZTg1M2E3LTRh/Y2UtNDk1YS04MGU5/LTM2ODJmNTE1YmM5/OC5zdmc.png" class="banner" alt="Banner Image">
-        <h1>Begin your journey <br> with me !</h1>
+
+        <img src="ya.png" class="banner" alt="Banner Image" style="width: 95%; height: auto; margin-left: 35px;">
+
+        <h1 style="font-family: 'Georgia', serif; text-align: left; font-size: 34px; line-height: 4.5; color:   #76acdc; margin-left: 75px;">
+           Selamat Datang
+        </h1>
+        
         <form id="loginForm" onsubmit="return handleSubmit()">
             <button type="submit">Start</button>
         </form>
